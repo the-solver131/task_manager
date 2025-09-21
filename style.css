@@ -1,56 +1,19 @@
-/* Simple styling for the app */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    padding-top: 50px;
-}
+/* Keep everything from before, add below */
 
-.container {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 350px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-h1 {
-    text-align: center;
-    color: #333;
-}
-
-input {
-    width: 70%;
-    padding: 8px;
-    margin-right: 5px;
-}
-
-button {
-    padding: 8px 12px;
-    cursor: pointer;
-}
-
-ul {
-    list-style-type: none;
-    padding-left: 0;
-    margin-top: 20px;
-}
-
-li {
-    padding: 8px;
-    background: #f9f9f9;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
+#aiTaskBtn {
+    background: #6c63ff;
+    color: white;
+    border: none;
+    margin-left: 5px;
     border-radius: 5px;
 }
 
-.delete-btn {
-    background: red;
+.edit-btn {
+    background: orange;
     color: white;
     border: none;
     padding: 4px 8px;
     border-radius: 4px;
+    margin-left: 5px;
     cursor: pointer;
 }
