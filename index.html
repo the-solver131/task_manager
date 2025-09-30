@@ -1,30 +1,133 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Manager</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TaskFlow — Task Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>Task Manager ✅</h1>
+  <div id="app">
 
-        <!-- Input to add new task -->
-        <input type="text" id="taskInput" placeholder="Add a new task">
-        <button id="addTaskBtn">Add Task</button>
-        <button id="aiTaskBtn">✨ Suggest Task</button>
-
-        <!-- Progress bar -->
-        <div id="progressContainer">
-            <div id="progressBar"></div>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">TaskFlow</div>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-label">Total Tasks</div>
+          <div id="statTotal" class="stat-value">0</div>
         </div>
-        <p id="progressText">0% Completed</p>
+        <div class="stat">
+          <div class="stat-label">Completed</div>
+          <div id="statCompleted" class="stat-value">0</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Pending</div>
+          <div id="statPending" class="stat-value">0</div>
+        </div>
+      </div>
 
-        <!-- Task list -->
-        <ul id="taskList"></ul>
-    </div>
+      <div class="filters">
+        <h4>Filters</h4>
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="active">Active</button>
+        <button class="filter-btn" data-filter="completed">Completed</button>
 
-    <script src="script.js"></script>
+        <h4 style="margin-top: 12px;">Priority</h4>
+        <button class="prio-btn active" data-prio="all">All</button>
+        <button class="prio-btn" data-prio="high">High</button>
+        <button class="prio-btn" data-prio="medium">Medium</button>
+        <button class="prio-btn" data-prio="low">Low</button>
+      </div>
+
+      <div class="sidebar-footer">
+        <small>Built with vanilla JS • LocalStorage</small>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <header class="header">
+        <div>
+          <h1>Today's Tasks</h1>
+          <p class="muted">Stay productive and organized</p>
+        </div>
+        <div class="header-actions">
+          <div class="view-toggle">
+            <button id="viewList" class="view-btn active">List</button>
+            <button id="viewGrid" class="view-btn">Grid</button>
+          </div>
+          <button id="btnAdd" class="primary">+ Add Task</button>
+        </div>
+      </header>
+
+      <!-- Progress Cards -->
+      <section class="cards">
+        <div class="card">
+          <div class="card-title">Today's Progress</div>
+          <div class="card-big" id="todayPercent">0%</div>
+          <div class="card-sub" id="todayCount">0 of 0 tasks completed</div>
+          <div class="progress-track"><div id="todayBar" class="progress-fill"></div></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Weekly Goal</div>
+          <div class="card-big" id="weeklyPercent">0%</div>
+          <div class="card-sub" id="weeklyCount">0 of 0 tasks completed</div>
+          <div class="progress-track"><div id="weeklyBar" class="progress-fill"></div></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Streak</div>
+          <div class="card-big" id="streakDays">0</div>
+          <div class="card-sub">Days of completing tasks</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Focus Time</div>
+          <div class="card-big" id="focusTime">0h</div>
+          <div class="card-sub">Estimated focused work</div>
+        </div>
+      </section>
+
+      <!-- Tasks container -->
+      <section class="tasks">
+        <div class="tasks-header">
+          <h3>Tasks</h3>
+          <select id="sortSelect">
+            <option value="created">Sort by Created</option>
+            <option value="dueDate">Sort by Due Date</option>
+            <option value="priority">Sort by Priority</option>
+          </select>
+        </div>
+        <div id="tasksContainer" class="tasks-list"></div>
+      </section>
+
+      <!-- Add / Edit form (hidden modal) -->
+      <div id="modal" class="modal hidden">
+        <div class="modal-panel">
+          <h3 id="modalTitle">Add Task</h3>
+          <form id="taskForm">
+            <label>Title <input id="taskTitle" required placeholder="Enter task title..." /></label>
+            <label>Due Date <input id="taskDue" type="date" /></label>
+            <label>Estimate (minutes) <input id="taskEstimate" type="number" min="0" placeholder="30" /></label>
+            <label>Priority
+              <select id="taskPriority">
+                <option value="low">Low Priority</option>
+                <option value="medium" selected>Medium Priority</option>
+                <option value="high">High Priority</option>
+              </select>
+            </label>
+            <div class="form-actions">
+              <button type="button" id="cancelBtn" class="secondary">Cancel</button>
+              <button type="submit" class="primary">Save Task</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
